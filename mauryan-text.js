@@ -7,7 +7,7 @@
     gsap.registerPlugin(ScrollTrigger, SplitText);
     var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     var q = function (s) { return [].slice.call(document.querySelectorAll(s)); };
-    var trig = function (el, start) { return { trigger: el, start: start || "top 88%", once: true }; };
+    var trig = function (el, start) { return { trigger: el, start: start || "top 68%", once: true }; };
 
     /* 1. masked line reveal */
     q('[data-text-anim="reveal"]').forEach(function (el) {
@@ -15,7 +15,7 @@
       SplitText.create(el, {
         type: "lines", mask: "lines", autoSplit: true, linesClass: "text-line",
         onSplit: function (self) {
-          return gsap.from(self.lines, { yPercent: 110, duration: 0.9, ease: "power4.out", stagger: 0.08, scrollTrigger: trig(el) });
+          return gsap.from(self.lines, { yPercent: 110, duration: 0.9, ease: "power4.out", stagger: 0.08, delay: 0.2, scrollTrigger: trig(el) });
         }
       });
     });
@@ -26,7 +26,7 @@
       SplitText.create(el, {
         type: "words", autoSplit: true,
         onSplit: function (self) {
-          return gsap.from(self.words, { opacity: 0, y: 24, filter: "blur(6px)", duration: 0.8, ease: "power3.out", stagger: 0.05, scrollTrigger: trig(el, "top 92%") });
+          return gsap.from(self.words, { opacity: 0, y: 24, filter: "blur(6px)", duration: 0.8, ease: "power3.out", stagger: 0.05, scrollTrigger: trig(el, "top 75%") });
         }
       });
     });
