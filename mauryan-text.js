@@ -65,6 +65,33 @@
       gsap.to(line, { scaleX: 1, duration: 0.9, delay: 0.5, ease: "power3.inOut", scrollTrigger: trig(el) });
     });
 
+
+    /* 6. uniform appear for the content that follows each heading (staggered fade + rise).
+       Targets are listed here; add data-appear to any extra element in the Designer. */
+    var APPEAR = [
+      ".section_supply .w-tab-menu", ".section_supply .w-tab-content",
+      ".numbers_text .button-outline", ".numbers_row",
+      ".compliance_grid > *", ".compliance_body .button-glass-dark",
+      ".global_stage",
+      ".usecase_nav", ".usecase_card",
+      ".blog_slider", ".blog_controls",
+      ".faq_intro .button-outline", ".faq_item",
+      ".cta_text p", ".cta_content .button-group",
+      "[data-appear]"
+    ];
+    if (!reduce) {
+      var seen = [];
+      var els = [];
+      APPEAR.forEach(function (sel) { q(sel).forEach(function (el) { if (seen.indexOf(el) < 0) { seen.push(el); els.push(el); } }); });
+      if (els.length) {
+        gsap.set(els, { opacity: 0, y: 32 });
+        ScrollTrigger.batch(els, {
+          start: "top 85%", once: true, interval: 0.1, batchMax: 6,
+          onEnter: function (batch) { gsap.to(batch, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out", stagger: 0.12, delay: 0.3, overwrite: true, clearProps: "transform" }); }
+        });
+      }
+    }
+
     window.addEventListener("load", function () { ScrollTrigger.refresh(); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
   }
