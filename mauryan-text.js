@@ -26,7 +26,7 @@
       SplitText.create(el, {
         type: "words", autoSplit: true,
         onSplit: function (self) {
-          return gsap.from(self.words, { opacity: 0, y: 24, filter: "blur(6px)", duration: 0.8, ease: "power3.out", stagger: 0.05, scrollTrigger: trig(el, "top 75%") });
+          return gsap.from(self.words, { opacity: 0, y: 24, filter: "blur(6px)", duration: 0.8, ease: "power3.out", stagger: 0.05, delay: 0.2, scrollTrigger: trig(el) });
         }
       });
     });
