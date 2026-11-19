@@ -570,6 +570,15 @@ function render(){
   if(i!==active)activate(i);
   const p=clamp((travel-off)/(i===3?.93:dur[i]-1));
   draw[i](reduced.matches?1:p);
+  const t=i<3?clamp(travel-off-(dur[i]-1)):0;
+  if(t>0&&!reduced.matches)draw[i+1](0);
+  scenes.forEach((n,k)=>{
+    const w=n.parentElement,d=k-(i+t),a=Math.abs(d);
+    w.style.transition='none';
+    w.style.opacity=a<1?String(1-a*.85):'0';
+    w.style.transform='translate3d('+(-d*7).toFixed(2)+'%,'+(d*105).toFixed(2)+'%,0)';
+    w.style.pointerEvents=a<.5?'auto':'none';
+  });
   dots.forEach((d,k)=>{const r=d.querySelector('[data-process-ring]');if(r)r.style.strokeDashoffset=C*(1-(k===i?p:(k<i?1:0)));});
 }
 function schedule(){if(!raf)raf=requestAnimationFrame(render)}
