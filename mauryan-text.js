@@ -77,6 +77,10 @@
       ".blog_slider", ".blog_controls",
       ".faq_intro .button-outline", ".faq_item",
       ".cta_text p", ".cta_content .button-group",
+      ".hero_paragraph", ".section_hero .button-group",
+      ".division_panel",
+      ".process_steps", ".process_progress", ".process_visual",
+      ".footer_contact", ".footer_group", ".footer_band", ".footer_bottom",
       "[data-appear]"
     ];
     if (!reduce) {
