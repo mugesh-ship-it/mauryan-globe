@@ -1,10 +1,9 @@
 /* Mauryan: How Procurement Works (scroll scenes) */
 (function(){
 const CSS=`
-[data-process="stage"] .process_frame{position:absolute;inset:0;pointer-events:none;z-index:0}
-[data-process="stage"] .process_frame i{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(calc(88% + 100px),580px);height:100%}
-[data-process="stage"] .process_frame i{background:repeating-linear-gradient(#d5dae2 0 4px,transparent 4px 9px) left/1px 100% no-repeat,repeating-linear-gradient(#d5dae2 0 4px,transparent 4px 9px) right/1px 100% no-repeat}
-[data-process="stage"] .process_frame b{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(100%,790px);height:426px;background:repeating-linear-gradient(90deg,#d5dae2 0 4px,transparent 4px 9px) top/100% 1px no-repeat,repeating-linear-gradient(90deg,#d5dae2 0 4px,transparent 4px 9px) bottom/100% 1px no-repeat}
+[data-process="stage"] .process_frame{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none;z-index:0}
+[data-process="stage"] .process_frame i{position:absolute;left:0;top:0;transform:translate(-50%,-50%);width:min(calc(88% + 100px),580px);width:580px;height:var(--ph,100vh);background:repeating-linear-gradient(#d5dae2 0 4px,transparent 4px 9px) left/1px 100% no-repeat,repeating-linear-gradient(#d5dae2 0 4px,transparent 4px 9px) right/1px 100% no-repeat}
+[data-process="stage"] .process_frame b{position:absolute;left:0;top:0;transform:translate(-50%,-50%);width:790px;height:426px;background:repeating-linear-gradient(90deg,#d5dae2 0 4px,transparent 4px 9px) top/100% 1px no-repeat,repeating-linear-gradient(90deg,#d5dae2 0 4px,transparent 4px 9px) bottom/100% 1px no-repeat}
 [data-proc-scene]{--blue:#0c51ee;--ink:#111827;--muted:#6b7686;--line:#e9edf3;width:100%;min-width:0;font-family:inherit;color:var(--ink)}
 [data-proc-scene] svg.fig{width:100%;height:auto;display:block;overflow:visible;margin:auto 0}
 [data-proc-scene] .f{stroke:#b9c2d0;stroke-width:.75;stroke-linejoin:round}
@@ -549,13 +548,13 @@ const scenes=[...section.querySelectorAll('[data-process-scene]')];
 const status=section.querySelector('[data-process="status"]');
 const st=document.createElement('style');st.textContent=CSS;document.head.appendChild(st);
 scenes.forEach(s=>s.setAttribute('data-proc-scene',''));
-if(!section.querySelector('.process_frame')&&scenes[0]){const v=scenes[0].parentElement.parentElement;const f=document.createElement('span');f.className='process_frame';f.setAttribute('aria-hidden','true');f.innerHTML='<i></i><b></b>';v.insertBefore(f,v.firstChild);}
+scenes.forEach(n=>{const w=n.parentElement;if(w.querySelector('.process_frame'))return;const f=document.createElement('span');f.className='process_frame';f.setAttribute('aria-hidden','true');f.innerHTML='<i></i><b></b>';w.insertBefore(f,w.firstChild);});
 const draw=scenes.map((s,i)=>mountScene(s,CARDS[i]));
 const dur=[1.5,1.5,2,2.18],total=dur.reduce((a,b)=>a+b,0);
 const reduced=matchMedia('(prefers-reduced-motion:reduce)');
 let active=-1,raf=0,vh=innerHeight;
 const C=163.36281798666926;
-function size(){vh=innerHeight;section.style.height=((total+1)*vh)+'px';stage.style.height=vh+'px';}
+function size(){vh=innerHeight;section.style.setProperty('--ph',vh+'px');section.style.height=((total+1)*vh)+'px';stage.style.height=vh+'px';}
 function flag(n,on){n.classList.toggle('is-active',on)}
 function activate(i){
   active=i;
@@ -580,8 +579,8 @@ function render(){
   scenes.forEach((n,k)=>{
     const w=n.parentElement,d=k-(i+t),a=Math.abs(d);
     w.style.transition='none';
-    w.style.opacity=a<1?String(1-a*.85):'0';
-    w.style.transform='translate3d('+(-d*7).toFixed(2)+'%,'+(d*105).toFixed(2)+'%,0)';
+    w.style.opacity='1';
+    w.style.transform='translate3d(0,'+(d*vh).toFixed(1)+'px,0)';
     w.style.pointerEvents=a<.5?'auto':'none';
   });
   dots.forEach((d,k)=>{const r=d.querySelector('[data-process-ring]');if(r)r.style.strokeDashoffset=C*(1-(k===i?p:(k<i?1:0)));});
