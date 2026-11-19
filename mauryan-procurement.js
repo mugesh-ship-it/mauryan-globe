@@ -51,6 +51,7 @@ const CSS=`
 [data-proc-scene] .icons .ib{width:40px;height:40px;border-radius:8px;border:1px solid #d9e1f6;display:grid;place-items:center;color:#b3bccb;background:#f5f7fd;transition:all .35s}
 [data-proc-scene] .icons .ib.on{color:var(--blue)}
 [data-proc-scene] .link+.pill{margin-top:18px}
+@media(max-width:991px){[data-process="stage"] .process_frame i{width:calc(100vw - 40px)}[data-process="stage"] .process_frame b{width:100vw;height:calc(var(--ph,100vh) - 24px)}}
 `;
 function init(){
 /* Shared engine for the four process cards: isometric primitives, the carton, and the card itself. */
@@ -552,9 +553,9 @@ scenes.forEach(n=>{const w=n.parentElement;if(w.querySelector('.process_frame'))
 const draw=scenes.map((s,i)=>mountScene(s,CARDS[i]));
 const dur=[1.5,1.5,2,2.18],total=dur.reduce((a,b)=>a+b,0);
 const reduced=matchMedia('(prefers-reduced-motion:reduce)');
-let active=-1,raf=0,vh=innerHeight;
+let active=-1,raf=0,vh=innerHeight,U=innerHeight;const stack=matchMedia('(max-width:991px)');
 const C=163.36281798666926;
-function size(){vh=innerHeight;section.style.setProperty('--ph',vh+'px');section.style.height=((total+1)*vh)+'px';stage.style.height=vh+'px';}
+function size(){vh=innerHeight;const v=scenes[0].parentElement.parentElement;U=stack.matches?Math.max(200,v.clientHeight):vh;section.style.setProperty('--ph',U+'px');section.style.height=((total+1)*vh)+'px';stage.style.height=vh+'px';}
 function flag(n,on){n.classList.toggle('is-active',on)}
 function activate(i){
   active=i;
@@ -580,7 +581,7 @@ function render(){
     const w=n.parentElement,d=k-(i+t),a=Math.abs(d);
     w.style.transition='none';
     w.style.opacity='1';
-    w.style.transform='translate3d(0,'+(d*vh).toFixed(1)+'px,0)';
+    w.style.transform='translate3d(0,'+(d*U).toFixed(1)+'px,0)';
     w.style.pointerEvents=a<.5?'auto':'none';
   });
   dots.forEach((d,k)=>{const r=d.querySelector('[data-process-ring]');if(r)r.style.strokeDashoffset=C*(1-(k===i?p:(k<i?1:0)));});
@@ -601,6 +602,7 @@ function go(n){
 size();render();
 addEventListener('scroll',schedule,{passive:true});
 addEventListener('resize',()=>{size();schedule()});
+stack.addEventListener('change',()=>{size();schedule()});
 addEventListener('load',()=>{size();schedule()});
 }
 
