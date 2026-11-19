@@ -7,7 +7,7 @@
     gsap.registerPlugin(ScrollTrigger, SplitText);
     var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     var q = function (s) { return [].slice.call(document.querySelectorAll(s)); };
-    var trig = function (el, start) { return { trigger: el, start: start || "top 68%", once: true }; };
+    var trig = function (el, start) { return { trigger: el, start: "clamp(" + (start || "top 68%") + ")", once: true }; };
 
     /* 1. masked line reveal */
     q('[data-text-anim="reveal"]').forEach(function (el) {
@@ -38,7 +38,7 @@
         type: "words", autoSplit: true,
         onSplit: function (self) {
           return gsap.fromTo(self.words, { opacity: 0.25 }, { opacity: 1, ease: "none", stagger: 0.1,
-            scrollTrigger: { trigger: el, start: "top 80%", end: "bottom 45%", scrub: true } });
+            scrollTrigger: { trigger: el, start: "clamp(top 80%)", end: "clamp(bottom 45%)", scrub: true } });
         }
       });
     });
@@ -83,19 +83,30 @@
       ".footer_contact", ".footer_group", ".footer_band", ".footer_bottom",
       "[data-appear]"
     ];
+    var seen = [];
+    var els = [];
     if (!reduce) {
-      var seen = [];
-      var els = [];
       APPEAR.forEach(function (sel) { q(sel).forEach(function (el) { if (seen.indexOf(el) < 0) { seen.push(el); els.push(el); } }); });
       if (els.length) {
         gsap.set(els, { opacity: 0, y: 32 });
         ScrollTrigger.batch(els, {
-          start: "top 85%", once: true, interval: 0.1, batchMax: 6,
+          start: "clamp(top 85%)", once: true, interval: 0.1, batchMax: 6,
           onEnter: function (batch) { gsap.to(batch, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out", stagger: 0.12, delay: 0.3, overwrite: true, clearProps: "transform" }); }
         });
       }
     }
 
+
+    /* failsafe for short or zoomed windows (e.g. Windows 125-150%): show anything still hidden once the page has loaded and when the bottom is reached */
+    function reveal() {
+      if (typeof els === "undefined") return;
+      els.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && parseFloat(getComputedStyle(el).opacity) === 0) gsap.to(el, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out", overwrite: true, clearProps: "transform" });
+      });
+    }
+    window.addEventListener("scroll", function () { clearTimeout(reveal.t); reveal.t = setTimeout(reveal, 700); }, { passive: true });
+    setTimeout(reveal, 2500);
     window.addEventListener("load", function () { ScrollTrigger.refresh(); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
   }
