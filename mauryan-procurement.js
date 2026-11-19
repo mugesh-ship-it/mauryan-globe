@@ -1,6 +1,10 @@
 /* Mauryan: How Procurement Works (scroll scenes) */
 (function(){
 const CSS=`
+[data-process="stage"] .process_frame{position:absolute;inset:0;pointer-events:none;z-index:0}
+[data-process="stage"] .process_frame i{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(calc(88% + 100px),580px);height:100%}
+[data-process="stage"] .process_frame i{background:repeating-linear-gradient(#d5dae2 0 4px,transparent 4px 9px) left/1px 100% no-repeat,repeating-linear-gradient(#d5dae2 0 4px,transparent 4px 9px) right/1px 100% no-repeat}
+[data-process="stage"] .process_frame b{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(100%,790px);height:426px;background:repeating-linear-gradient(90deg,#d5dae2 0 4px,transparent 4px 9px) top/100% 1px no-repeat,repeating-linear-gradient(90deg,#d5dae2 0 4px,transparent 4px 9px) bottom/100% 1px no-repeat}
 [data-proc-scene]{--blue:#0c51ee;--ink:#111827;--muted:#6b7686;--line:#e9edf3;width:100%;min-width:0;font-family:inherit;color:var(--ink)}
 [data-proc-scene] svg.fig{width:100%;height:auto;display:block;overflow:visible;margin:auto 0}
 [data-proc-scene] .f{stroke:#b9c2d0;stroke-width:.75;stroke-linejoin:round}
@@ -545,6 +549,7 @@ const scenes=[...section.querySelectorAll('[data-process-scene]')];
 const status=section.querySelector('[data-process="status"]');
 const st=document.createElement('style');st.textContent=CSS;document.head.appendChild(st);
 scenes.forEach(s=>s.setAttribute('data-proc-scene',''));
+if(!section.querySelector('.process_frame')&&scenes[0]){const v=scenes[0].parentElement.parentElement;const f=document.createElement('span');f.className='process_frame';f.setAttribute('aria-hidden','true');f.innerHTML='<i></i><b></b>';v.insertBefore(f,v.firstChild);}
 const draw=scenes.map((s,i)=>mountScene(s,CARDS[i]));
 const dur=[1.5,1.5,2,2.18],total=dur.reduce((a,b)=>a+b,0);
 const reduced=matchMedia('(prefers-reduced-motion:reduce)');
