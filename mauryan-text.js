@@ -31,17 +31,7 @@
       });
     });
 
-    /* 3. scroll-scrubbed colour fill */
-    q('[data-text-anim="fill"]').forEach(function (el) {
-      if (reduce) return;
-      SplitText.create(el, {
-        type: "words", autoSplit: true,
-        onSplit: function (self) {
-          return gsap.fromTo(self.words, { opacity: 0.25 }, { opacity: 1, ease: "none", stagger: 0.1,
-            scrollTrigger: { trigger: el, start: "clamp(top 80%)", end: "clamp(bottom 45%)", scrub: true } });
-        }
-      });
-    });
+    /* 3. paragraphs (data-text-anim="fill"): no scrub any more, they use the uniform appear-from-bottom below */
 
     /* 4. number count-up */
     q("[data-count]").forEach(function (el) {
@@ -81,7 +71,7 @@
       ".division_panel",
       ".process_steps", ".process_progress", ".process_visual",
       ".footer_contact", ".footer_group", ".footer_band", ".footer_bottom",
-      "[data-appear]"
+      '[data-text-anim="fill"]', "[data-appear]"
     ];
     var seen = [];
     var els = [];
