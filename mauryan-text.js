@@ -70,7 +70,7 @@
       ".hero_paragraph", ".section_hero .button-group",
       ".division_panel",
       ".process_steps", ".process_progress", ".process_visual",
-      ".footer_contact", ".footer_group", ".footer_band", ".footer_bottom",
+      ".footer_contact", ".footer_group", ".footer_band",
       '[data-text-anim="fill"]', "[data-appear]"
     ];
     var seen = [];
