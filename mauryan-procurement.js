@@ -6,7 +6,6 @@ const CSS=`
 [data-process="stage"] .process_frame b{position:absolute;left:0;top:0;transform:translate(-50%,-50%);width:940px;height:540px;background:repeating-linear-gradient(90deg,#d5dae2 0 4px,transparent 4px 9px) top/100% 1px no-repeat,repeating-linear-gradient(90deg,#d5dae2 0 4px,transparent 4px 9px) bottom/100% 1px no-repeat}
 [data-proc-scene]{--blue:#0c51ee;--ink:#111827;--muted:#6b7686;--line:#e9edf3;width:100%;min-width:0;font-family:inherit;color:#151515}
 [data-proc-scene] svg.fig{width:100%;height:auto;display:block;overflow:visible;margin:auto 0}
-@media(min-width:992px){[data-proc-scene="requirement"]{max-width:60rem}[data-proc-scene="requirement"] svg.fig{width:100%;max-width:36rem;margin:auto}}
 [data-proc-scene] .f{stroke:#b9c2d0;stroke-width:1;stroke-linejoin:round}
 [data-proc-scene] .lf{fill:#f1f4f8}[data-proc-scene] .rt{fill:#e4e9f0}[data-proc-scene] .tp{fill:#fff}[data-proc-scene] .dp{fill:#dde3ec}
 [data-proc-scene="requirement"] .f,[data-proc-scene="requirement"] svg.fig [stroke-width="1"]{stroke-width:.75}
