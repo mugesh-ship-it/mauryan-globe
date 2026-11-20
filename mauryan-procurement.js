@@ -53,7 +53,7 @@ const CSS=`
 [data-proc-scene] .icons .ib.on{color:var(--blue)}
 [data-proc-scene] .link+.pill{margin-top:18px}
 @media(max-width:420px){[data-proc-scene] .list li{font-size:16px}}
-.process_circle,.process_circle.is-active{border-color:transparent!important}[data-process-track]{stroke:#d5dae2;stroke-dasharray:2.86 2.86;transition:stroke .3s}.process_circle.is-active [data-process-track]{stroke:#151515;stroke-dasharray:none}
+.process_circle,.process_circle.is-active{border-color:transparent!important}[data-process-track]{stroke:#d5dae2;stroke-dasharray:2.86 2.86;transition:stroke .3s}
 @media(max-width:991px){[data-process="stage"] .process_frame i{width:calc(100vw - 40px)}[data-process="stage"] .process_frame b{width:100vw;height:calc(var(--ph,100vh) - 24px)}}
 `;
 function init(){
