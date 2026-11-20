@@ -59,7 +59,7 @@
     /* 6. uniform appear for the content that follows each heading (staggered fade + rise).
        Targets are listed here; add data-appear to any extra element in the Designer. */
     var APPEAR = [
-      ".section_supply .w-tab-menu", ".section_supply .w-tab-content",
+      ".section_supply .w-tab-content",
       ".numbers_text .button-outline", ".numbers_row",
       ".compliance_grid > *", ".compliance_body .button-glass-dark",
       ".global_stage",
