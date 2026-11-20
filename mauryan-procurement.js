@@ -6,11 +6,11 @@ const CSS=`
 [data-process="stage"] .process_frame b{position:absolute;left:0;top:0;transform:translate(-50%,-50%);width:940px;height:540px;background:repeating-linear-gradient(90deg,#d5dae2 0 4px,transparent 4px 9px) top/100% 1px no-repeat,repeating-linear-gradient(90deg,#d5dae2 0 4px,transparent 4px 9px) bottom/100% 1px no-repeat}
 [data-proc-scene]{--blue:#0c51ee;--ink:#111827;--muted:#6b7686;--line:#e9edf3;width:100%;min-width:0;font-family:inherit;color:var(--ink)}
 [data-proc-scene] svg.fig{width:100%;height:auto;display:block;overflow:visible;margin:auto 0}
-[data-proc-scene] .f{stroke:#b9c2d0;stroke-width:.75;stroke-linejoin:round}
+[data-proc-scene] .f{stroke:#b9c2d0;stroke-width:1;stroke-linejoin:round}
 [data-proc-scene] .lf{fill:#f1f4f8}[data-proc-scene] .rt{fill:#e4e9f0}[data-proc-scene] .tp{fill:#fff}[data-proc-scene] .dp{fill:#dde3ec}
-[data-proc-scene] svg.fig [stroke-width="1"]{stroke-width:.75}
-[data-proc-scene] svg.fig [stroke-width="2.6"],[data-proc-scene] svg.fig [stroke-width="2.4"],[data-proc-scene] svg.fig [stroke-width="1.8"]{stroke-width:1.25}
-[data-proc-scene] svg.fig [stroke-width="1.6"]{stroke-width:1}
+[data-proc-scene="requirement"] .f,[data-proc-scene="requirement"] svg.fig [stroke-width="1"]{stroke-width:.75}
+[data-proc-scene="requirement"] svg.fig [stroke-width="2.6"],[data-proc-scene="requirement"] svg.fig [stroke-width="2.4"],[data-proc-scene="requirement"] svg.fig [stroke-width="1.8"]{stroke-width:1.25}
+[data-proc-scene="requirement"] svg.fig [stroke-width="1.6"]{stroke-width:1}
 [data-proc-scene] .list{list-style:none;margin:4px 0 0;padding:0}
 [data-proc-scene] .list li{display:flex;align-items:center;gap:12px;padding:13px 2px;border-top:1px solid var(--line);font-size:16px;color:var(--muted);transition:color .3s}
 [data-proc-scene] .list li.on{color:var(--ink)}
@@ -19,11 +19,14 @@ const CSS=`
 [data-proc-scene] .tk path{fill:none;stroke:var(--blue);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .35s ease .05s}
 [data-proc-scene] li.on .tk circle{stroke:var(--blue);fill:#f4f7ff}
 [data-proc-scene] li.on .tk path{stroke-dashoffset:0}
-[data-proc-scene] .pill{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:9px 15px;border:1px solid #e1e6ef;border-radius:999px;font-size:13px;line-height:17px;color:#97a1b3;background:#fff;white-space:nowrap;transition:all .3s}
-[data-proc-scene] .pill i{width:6px;height:6px;border-radius:50%;background:#c9d1df;transition:background .3s}
+[data-proc-scene] .pill{display:inline-flex;align-items:center;gap:9px;margin-top:16px;padding:9px 16px;border:1px solid #e3e8f0;border-radius:999px;font-size:14px;font-weight:500;color:#97a1b3;background:#fff;white-space:nowrap;transition:all .3s}
+[data-proc-scene] .pill i{width:8px;height:8px;border-radius:50%;background:#cfd6e2;transition:background .3s}
 [data-proc-scene] .pill.on{color:var(--blue);border-color:#dbe3f5;background:#f7f9ff}
 [data-proc-scene] .pill.on i{background:var(--blue)}
-[data-proc-scene] .ic{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round;flex:none}
+[data-proc-scene="requirement"] .pill,[data-proc-scene="requirement"] .pill.on{gap:8px;padding:9px 15px;border-color:#e1e6ef;background:#fff;color:#97a1b3;font-size:13px;font-weight:400;line-height:17px;white-space:nowrap}
+[data-proc-scene="requirement"] .pill i,[data-proc-scene="requirement"] .pill.on i{width:6px;height:6px;background:#c9d1df}
+[data-proc-scene] .ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+[data-proc-scene="requirement"] .ic{width:18px;height:18px;stroke-width:1.45}
 [data-proc-scene] .tl{font-size:14px;font-weight:500;line-height:1.25}
 [data-proc-scene] .link{margin-top:8px}
 [data-proc-scene] .ends{display:flex;align-items:center;gap:12px}
@@ -549,7 +552,7 @@ const dots=[...section.querySelectorAll('[data-process-dot]')];
 const scenes=[...section.querySelectorAll('[data-process-scene]')];
 const status=section.querySelector('[data-process="status"]');
 const st=document.createElement('style');st.textContent=CSS;document.head.appendChild(st);
-scenes.forEach(s=>s.setAttribute('data-proc-scene',''));
+scenes.forEach((s,i)=>s.setAttribute('data-proc-scene',CARDS[i].id));
 scenes.forEach(n=>{const w=n.parentElement;if(w.querySelector('.process_frame'))return;const f=document.createElement('span');f.className='process_frame';f.setAttribute('aria-hidden','true');f.innerHTML='<i></i><b></b>';w.insertBefore(f,w.firstChild);});
 const draw=scenes.map((s,i)=>mountScene(s,CARDS[i]));
 const dur=[1.5,1.5,2,2.18],total=dur.reduce((a,b)=>a+b,0);
