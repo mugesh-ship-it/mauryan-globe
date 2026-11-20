@@ -53,6 +53,7 @@ const CSS=`
 [data-proc-scene] .icons .ib.on{color:var(--blue)}
 [data-proc-scene] .link+.pill{margin-top:18px}
 @media(max-width:420px){[data-proc-scene] .list li{font-size:16px}}
+.process_circle,.process_circle.is-active{border-color:transparent!important}[data-process-track]{stroke:#d5dae2;stroke-dasharray:2.86 2.86;transition:stroke .3s}.process_circle.is-active [data-process-track]{stroke:#151515;stroke-dasharray:none}
 @media(max-width:991px){[data-process="stage"] .process_frame i{width:calc(100vw - 40px)}[data-process="stage"] .process_frame b{width:100vw;height:calc(var(--ph,100vh) - 24px)}}
 `;
 function init(){
@@ -568,7 +569,7 @@ function activate(i){
   scenes.forEach((n,k)=>{const p=n.parentElement;flag(p,k===i);p.setAttribute('aria-hidden',String(k!==i));});
 }
 dots.forEach(d=>{const c=d.querySelector('.process_circle');if(!c||c.querySelector('[data-process-ring]'))return;
-  c.insertAdjacentHTML('beforeend','<svg viewBox="0 0 60 60" aria-hidden="true" style="position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);transform:rotate(-90deg);pointer-events:none"><circle data-process-ring cx="30" cy="30" r="26" fill="none" stroke="#0c51ee" stroke-width="2" stroke-linecap="round" stroke-dasharray="163.36" stroke-dashoffset="163.36"/></svg>');});
+  c.insertAdjacentHTML('beforeend','<svg viewBox="0 0 60 60" aria-hidden="true" style="position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);transform:rotate(-90deg);pointer-events:none"><circle data-process-track cx="30" cy="30" r="26" fill="none" stroke-width="1.43"/><circle data-process-ring cx="30" cy="30" r="26" fill="none" stroke="#151515" stroke-width="1.43" stroke-dasharray="163.36" stroke-dashoffset="163.36"/></svg>');});
 function render(){
   raf=0;
   const travel=clamp(-section.getBoundingClientRect().top/vh,0,total-.00001);
