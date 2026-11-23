@@ -7,7 +7,9 @@
     gsap.registerPlugin(ScrollTrigger, SplitText);
     var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     var q = function (s) { return [].slice.call(document.querySelectorAll(s)); };
-    var trig = function (el, start) { return { trigger: el, start: "clamp(" + (start || "top 68%") + ")", once: true }; };
+    var trig = function (el, start) { return inView(el) ? null : { trigger: el, start: "clamp(" + (start || "top 68%") + ")", once: true }; };
+    /* anything already on screen at load (hero) plays straight away; ScrollTrigger only fires after the first scroll */
+    var inView = function (el) { return el.getBoundingClientRect().top < window.innerHeight * 0.85; };
 
     /* 1. masked line reveal */
     q('[data-text-anim="reveal"]').forEach(function (el) {
@@ -79,7 +81,9 @@
       APPEAR.forEach(function (sel) { q(sel).forEach(function (el) { if (seen.indexOf(el) < 0) { seen.push(el); els.push(el); } }); });
       if (els.length) {
         gsap.set(els, { opacity: 0, y: 32 });
-        ScrollTrigger.batch(els, {
+        var now = els.filter(inView);
+        if (now.length) gsap.to(now, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out", stagger: 0.12, delay: 0.5, overwrite: true, clearProps: "transform" });
+        ScrollTrigger.batch(els.filter(function (e) { return now.indexOf(e) < 0; }), {
           start: "clamp(top 85%)", once: true, interval: 0.1, batchMax: 6,
           onEnter: function (batch) { gsap.to(batch, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out", stagger: 0.12, delay: 0.3, overwrite: true, clearProps: "transform" }); }
         });
