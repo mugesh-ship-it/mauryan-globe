@@ -3,7 +3,7 @@
 const CSS=`
 [data-process="stage"] .process_frame{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none;z-index:-1}
 [data-process="stage"] .process_frame i{position:absolute;left:0;top:0;transform:translate(-50%,-50%);width:580px;height:var(--ph,100vh);background:repeating-linear-gradient(#d5dae2 0 4px,transparent 4px 9px) left/1px 100% no-repeat,repeating-linear-gradient(#d5dae2 0 4px,transparent 4px 9px) right/1px 100% no-repeat}
-[data-process="stage"] .process_frame b{position:absolute;left:0;top:0;transform:translate(-50%,-50%);width:790px;height:426px;background:repeating-linear-gradient(90deg,#d5dae2 0 4px,transparent 4px 9px) top/100% 1px no-repeat,repeating-linear-gradient(90deg,#d5dae2 0 4px,transparent 4px 9px) bottom/100% 1px no-repeat}
+[data-process="stage"] .process_frame b{position:absolute;left:0;top:0;transform:translate(-50%,-50%);width:790px;height:540px;background:repeating-linear-gradient(90deg,#d5dae2 0 4px,transparent 4px 9px) top/100% 1px no-repeat,repeating-linear-gradient(90deg,#d5dae2 0 4px,transparent 4px 9px) bottom/100% 1px no-repeat}
 [data-proc-scene]{--blue:#0c51ee;--ink:#111827;--muted:#6b7686;--line:#e9edf3;width:100%;min-width:0;font-family:inherit;color:#151515}
 [data-proc-scene] svg.fig{width:100%;height:auto;display:block;overflow:visible;margin:auto 0}
 [data-proc-scene] .f{stroke:#b9c2d0;stroke-width:1;stroke-linejoin:round}
