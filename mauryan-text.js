@@ -91,6 +91,17 @@
     }
 
 
+    /* headings inside tab panes that were display:none at load never reach their scroll trigger: play them when the tab is opened */
+    function revealPane() {
+      q('[data-text-anim="words"],[data-text-anim="reveal"]').forEach(function (h) {
+        if (!h.offsetParent || !h.children.length) return;
+        var kids = [].slice.call(h.querySelectorAll(".text-line")).length ? h.querySelectorAll(".text-line") : h.children;
+        var hidden = [].filter.call(kids, function (k) { return parseFloat(getComputedStyle(k).opacity) < 0.05 || (k.classList.contains("text-line") && h.getBoundingClientRect().height && false); });
+        if (hidden.length) gsap.to(hidden, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out", stagger: 0.05, overwrite: true, clearProps: "transform,filter" });
+      });
+    }
+    document.addEventListener("click", function (e) { if (e.target.closest && e.target.closest(".w-tab-link")) { setTimeout(revealPane, 120); setTimeout(revealPane, 600); } });
+
     /* failsafe for short or zoomed windows (e.g. Windows 125-150%): show anything still hidden once the page has loaded and when the bottom is reached */
     function reveal() {
       if (typeof els === "undefined") return;
