@@ -23,8 +23,8 @@ const CSS=`
 [data-proc-scene] .pill i{width:8px;height:8px;border-radius:50%;background:#cfd6e2;transition:background .3s}
 [data-proc-scene] .pill.on{color:var(--blue);border-color:#dbe3f5;background:#f7f9ff}
 [data-proc-scene] .pill.on i{background:var(--blue)}
-[data-proc-scene="requirement"] .pill,[data-proc-scene="requirement"] .pill.on{gap:8px;padding:9px 15px;font-size:13px;font-weight:400;line-height:17px;white-space:nowrap}[data-proc-scene="requirement"] .pill{border-color:#e1e6ef;background:#fff;color:#97a1b3}[data-proc-scene="requirement"] .pill.on{border-color:#dbe3f5;background:#f7f9ff;color:var(--blue)}
-[data-proc-scene="requirement"] .pill i,[data-proc-scene="requirement"] .pill.on i{width:6px;height:6px}[data-proc-scene="requirement"] .pill i{background:#c9d1df}[data-proc-scene="requirement"] .pill.on i{background:var(--blue)}
+[data-proc-scene="requirement"] .pill,[data-proc-scene="requirement"] .pill.on{gap:8px;padding:9px 15px;font-size:13px;font-weight:400;line-height:17px;white-space:nowrap}[data-proc-scene="requirement"] .pill,[data-proc-scene="requirement"] .pill.on{border-color:#dbe3f5;background:#f7f9ff;color:var(--blue)}
+[data-proc-scene="requirement"] .pill i,[data-proc-scene="requirement"] .pill.on i{width:6px;height:6px}[data-proc-scene="requirement"] .pill i,[data-proc-scene="requirement"] .pill.on i{background:var(--blue)}
 [data-proc-scene] .ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
 [data-proc-scene="requirement"] .ic{width:18px;height:18px;stroke-width:1.45}
 [data-proc-scene] .tl{font-size:14px;font-weight:500;line-height:1.25}
