@@ -27,7 +27,7 @@ const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
 const DEG=Math.PI/180, TAU=Math.PI*2;
 const locations=items.map(function(el,i){var n=el.querySelector('.global_location-name');return{key:'loc'+i,name:n?n.textContent.trim():'',lat:parseFloat(el.getAttribute('data-lat')),lon:parseFloat(el.getAttribute('data-lon'))};}).filter(function(l){return isFinite(l.lat)&&isFinite(l.lon);});
 if(!locations.length)return;
-let selected=0, yaw=-108*DEG, tilt=-6*DEG, width=0,height=0,radius=0,cx=0,cy=0,dpr=1;
+let selected=0, yaw=(-108+(matchMedia("(max-width:600px)").matches?30:0))*DEG, tilt=-6*DEG, width=0,height=0,radius=0,cx=0,cy=0,dpr=1;
 let paused=reduceMotion.matches,visible=true,frame=0,last=0,elapsed=0,dragging=false,pointer=null,dragDistance=0;
 let focus=null,holdUntil=0,hovered=-1,drawnMarkers=[],titleTimer;
 let buckets=Array.from({length:48},()=>[]);
