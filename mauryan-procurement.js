@@ -75,7 +75,7 @@ const CSS=`
 }
 .process_circle,.process_circle.is-active{border-color:transparent!important}[data-process-track]{stroke:#d5dae2;stroke-dasharray:2.86 2.86;transition:stroke .3s}
 @media(max-width:991px){[data-process="stage"] .process_frame i{width:calc(100vw - 40px)}[data-process="stage"] .process_frame b{width:100vw;height:calc(var(--ph,100vh) - 24px)}}
-@media(max-width:767px){[data-process="stage"] .process_frame i{width:calc(100vw - 50px);height:calc(var(--ph,100vh)*.74)}[data-process="stage"] .process_frame b{height:calc(var(--ph,100vh)*.74)}[data-process-track]{stroke-dasharray:none}[data-proc-scene="requirement"] .foot{flex-wrap:nowrap;gap:8px}[data-proc-scene="requirement"] .icons{gap:8px}[data-proc-scene="requirement"] .icons .ib{width:34px;height:34px;border-radius:7px}}
+@media(max-width:767px){[data-process="stage"] .process_frame i{width:calc(100vw - 50px);height:calc(var(--ph,100vh)*.74)}[data-process="stage"] .process_frame b{height:calc(var(--ph,100vh)*.74)}[data-process-track]{stroke-dasharray:none}[data-proc-scene="requirement"] .foot{flex-wrap:nowrap;gap:8px}[data-proc-scene="requirement"] .icons{gap:8px}[data-proc-scene="requirement"] .icons .ib{width:34px;height:34px;border-radius:7px}[data-proc-scene="requirement"] .pill,[data-proc-scene="requirement"] .pill.on{padding:7px 12px;font-size:12px;gap:7px}}
 `;
 function init(){
 /* Shared engine for the four process cards: isometric primitives, the carton, and the card itself. */
