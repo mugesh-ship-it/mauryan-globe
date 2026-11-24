@@ -75,6 +75,7 @@ const CSS=`
 }
 .process_circle,.process_circle.is-active{border-color:transparent!important}[data-process-track]{stroke:#d5dae2;stroke-dasharray:2.86 2.86;transition:stroke .3s}
 @media(max-width:991px){[data-process="stage"] .process_frame i{width:calc(100vw - 40px)}[data-process="stage"] .process_frame b{width:100vw;height:calc(var(--ph,100vh) - 24px)}}
+@media(max-width:767px){[data-process="stage"] .process_frame i{width:calc(100vw - 50px);height:var(--ph,100vh)}[data-process="stage"] .process_frame b{height:var(--ph,100vh)}[data-process-track]{stroke-dasharray:none}}
 `;
 function init(){
 /* Shared engine for the four process cards: isometric primitives, the carton, and the card itself. */
@@ -588,7 +589,7 @@ function fit(){
     n.style.transformOrigin='50% 50%';n.style.transform=k<1?'scale('+k.toFixed(3)+')':'none';
   });
 }
-function size(){vh=innerHeight;const v=scenes[0].parentElement.parentElement;U=stack.matches?Math.max(200,v.clientHeight):vh;section.style.setProperty('--ph',U+'px');section.style.height=((total+1)*vh)+'px';stage.style.height=vh+'px';fit();}
+function size(){vh=innerHeight;const sh=stack.matches?Math.max(0,-(parseFloat(getComputedStyle(stage).top)||0)):0;stage.style.height=(vh+sh)+'px';const v=scenes[0].parentElement.parentElement;U=stack.matches?Math.max(200,v.clientHeight):vh;section.style.setProperty('--ph',U+'px');section.style.height=((total+1)*vh+sh)+'px';fit();}
 function center(){
   if(stack.matches){scenes.forEach(n=>n.style.removeProperty('--optical-offset'));return;}
   scenes.forEach(n=>{
