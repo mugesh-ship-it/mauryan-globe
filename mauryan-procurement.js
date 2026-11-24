@@ -75,7 +75,7 @@ const CSS=`
 }
 .process_circle,.process_circle.is-active{border-color:transparent!important}[data-process-track]{stroke:#d5dae2;stroke-dasharray:2.86 2.86;transition:stroke .3s}
 @media(max-width:991px){[data-process="stage"] .process_frame i{width:calc(100vw - 40px)}[data-process="stage"] .process_frame b{width:100vw;height:calc(var(--ph,100vh) - 24px)}}
-@media(max-width:767px){[data-process="stage"] .process_frame i{width:calc(100vw - 50px);height:var(--ph,100vh)}[data-process="stage"] .process_frame b{height:var(--ph,100vh)}[data-process-track]{stroke-dasharray:none}}
+@media(max-width:767px){[data-process="stage"] .process_frame i{width:calc(100vw - 50px);height:calc(var(--ph,100vh)*.74)}[data-process="stage"] .process_frame b{height:calc(var(--ph,100vh)*.74)}[data-process-track]{stroke-dasharray:none}[data-proc-scene="requirement"] .foot{flex-wrap:nowrap;gap:8px}[data-proc-scene="requirement"] .icons{gap:8px}[data-proc-scene="requirement"] .icons .ib{width:34px;height:34px;border-radius:7px}}
 `;
 function init(){
 /* Shared engine for the four process cards: isometric primitives, the carton, and the card itself. */
@@ -585,7 +585,7 @@ function fit(){
   scenes.forEach(n=>{
     if(!phone){n.style.removeProperty('transform');n.style.removeProperty('transform-origin');return;}
     n.style.transform='none';
-    const h=n.offsetHeight,k=h?Math.min(1,Math.max(.6,(U-72)/h)):1;
+    const h=n.offsetHeight,k=h?Math.min(1,Math.max(.6,(U*.74-16)/h)):1;
     n.style.transformOrigin='50% 50%';n.style.transform=k<1?'scale('+k.toFixed(3)+')':'none';
   });
 }
